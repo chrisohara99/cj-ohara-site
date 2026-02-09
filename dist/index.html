@@ -7,112 +7,140 @@
     <meta name="description" content="Client-focused professional with experience in account management, operations, and program coordination. Based in Huntington, NY, open to relocation.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --text: #334155;
-            --text-light: #64748b;
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --text: #333;
+            --text-light: #666;
             --bg: #ffffff;
-            --bg-alt: #f8fafc;
-            --border: #e2e8f0;
-            --success: #10b981;
+            --bg-alt: #f8f9fa;
+            --border: #e5e5e5;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.6; background: var(--bg); }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; line-height: 1.3; }
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
         
         /* Navigation */
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; padding: 16px 0; }
-        .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-size: 1.1rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-links { display: flex; gap: 28px; list-style: none; }
-        .nav-links a { color: var(--text-light); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 16px 0; }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--text); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
         .nav-links a:hover { color: var(--accent); }
         
+        /* Mobile Menu */
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--primary); margin: 5px 0; transition: 0.3s; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .mobile-nav.active { display: block; }
+        .mobile-nav ul { list-style: none; padding: 16px 24px; }
+        .mobile-nav li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .mobile-nav li:last-child { border-bottom: none; }
+        .mobile-nav a { color: var(--text); font-size: 1rem; font-weight: 500; }
+        
         /* Hero */
-        .hero { padding: 140px 24px 80px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; }
-        .hero-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
-        .hero-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); flex-shrink: 0; }
-        .hero-content h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
-        .hero-content .tagline { font-size: 1.2rem; color: var(--accent-light); font-weight: 500; margin-bottom: 16px; }
-        .hero-content .location { font-size: 1rem; opacity: 0.8; margin-bottom: 20px; }
-        .hero-content .location svg { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+        .hero { padding: 140px 0 80px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; }
+        .hero .container { display: flex; align-items: center; gap: 50px; }
+        .hero-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); flex-shrink: 0; }
+        .hero-content { flex: 1; }
+        .hero h1 { font-size: 2.8rem; color: white; margin-bottom: 12px; }
+        .hero .tagline { font-size: 1.2rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+        .hero .location { font-size: 1rem; opacity: 0.85; margin-bottom: 24px; }
         .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn { display: inline-block; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
         .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
-        .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+        .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
         
         /* Sections */
-        section { padding: 80px 24px; }
+        section { padding: 80px 0; }
         section.alt { background: var(--bg-alt); }
-        .section-inner { max-width: 900px; margin: 0 auto; }
-        .section-title { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
-        .section-title::before { content: ''; width: 4px; height: 28px; background: var(--accent); border-radius: 2px; }
+        .section-title { font-size: 2rem; color: var(--primary); margin-bottom: 40px; text-align: center; }
         
         /* About */
-        .about-text { font-size: 1.1rem; line-height: 1.8; color: var(--text); max-width: 720px; }
-        .about-text p { margin-bottom: 20px; }
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-        .skill-tag { background: var(--bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 24px; font-size: 0.85rem; font-weight: 500; color: var(--text); }
+        .about-content { max-width: 700px; margin: 0 auto; text-align: center; }
+        .about-content p { font-size: 1.1rem; margin-bottom: 20px; color: var(--text); }
+        .skills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+        .skill { background: white; border: 1px solid var(--border); padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 500; color: var(--text); }
         
         /* Experience */
-        .timeline { position: relative; }
-        .timeline-item { position: relative; padding-left: 32px; padding-bottom: 40px; border-left: 2px solid var(--border); }
-        .timeline-item:last-child { padding-bottom: 0; border-left-color: transparent; }
-        .timeline-dot { position: absolute; left: -8px; top: 4px; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; border: 3px solid var(--bg-alt); }
-        .timeline-item.current .timeline-dot { background: var(--success); }
-        .job-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-        .job-title { font-size: 1.15rem; font-weight: 600; color: var(--primary); }
-        .job-date { font-size: 0.85rem; color: var(--text-light); font-weight: 500; background: var(--bg); padding: 4px 12px; border-radius: 4px; }
-        .job-company { font-size: 1rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
-        .job-bullets { list-style: none; }
-        .job-bullets li { position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text); font-size: 0.95rem; }
-        .job-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+        .experience-item { padding: 32px 0; border-bottom: 1px solid var(--border); }
+        .experience-item:last-child { border-bottom: none; }
+        .experience-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+        .experience-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--primary); }
+        .experience-date { font-size: 0.85rem; color: var(--text-light); background: var(--bg-alt); padding: 4px 12px; border-radius: 4px; }
+        .experience-company { font-size: 1rem; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+        .experience-bullets { list-style: none; }
+        .experience-bullets li { position: relative; padding-left: 24px; margin-bottom: 10px; color: var(--text); }
+        .experience-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
         
         /* Education */
-        .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        .edu-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-        .edu-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
-        .edu-card .degree { color: var(--text); font-size: 0.95rem; margin-bottom: 4px; }
-        .edu-card .year { color: var(--text-light); font-size: 0.85rem; }
-        .cert-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--success) 0%, #059669 100%); color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; margin-top: 24px; }
-        .cert-badge svg { width: 20px; height: 20px; }
+        .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 700px; margin: 0 auto; }
+        .edu-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; }
+        .edu-card h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 8px; }
+        .edu-card .degree { color: var(--text); margin-bottom: 4px; }
+        .edu-card .year { color: var(--text-light); font-size: 0.9rem; }
+        .certification { text-align: center; margin-top: 40px; }
+        .cert-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; }
+        .cert-badge svg { width: 22px; height: 22px; }
         
         /* Contact */
-        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .contact-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; transition: all 0.2s; text-decoration: none; color: inherit; }
+        .contact-intro { text-align: center; max-width: 500px; margin: 0 auto 40px; color: var(--text-light); }
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 700px; margin: 0 auto; }
+        .contact-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 32px 24px; text-align: center; transition: all 0.2s; }
         .contact-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        .contact-card svg { width: 32px; height: 32px; color: var(--accent); margin-bottom: 12px; }
-        .contact-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
-        .contact-card p { font-size: 0.85rem; color: var(--text-light); }
+        .contact-card svg { width: 28px; height: 28px; color: var(--accent); margin-bottom: 16px; }
+        .contact-card h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .contact-card p { font-size: 0.85rem; color: var(--text-light); word-break: break-word; }
+        .contact-card a { color: inherit; text-decoration: none; }
         
         /* Footer */
-        footer { background: var(--primary); color: white; padding: 32px 24px; text-align: center; }
+        footer { background: var(--primary); color: white; padding: 32px 0; text-align: center; }
         footer p { opacity: 0.7; font-size: 0.85rem; }
         
         /* Mobile */
         @media (max-width: 768px) {
-            .hero-inner { flex-direction: column; text-align: center; }
-            .hero-content h1 { font-size: 2rem; }
+            .hero .container { flex-direction: column; text-align: center; }
+            .hero-photo { width: 160px; height: 160px; }
+            .hero h1 { font-size: 2rem; }
             .hero-buttons { justify-content: center; }
             .nav-links { display: none; }
+            .menu-toggle { display: block; }
             .edu-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; }
-            .job-header { flex-direction: column; }
+            .experience-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-inner">
-            <a href="#" class="nav-brand">C.J. O'Hara</a>
+        <div class="container">
+            <a href="#" class="logo">C.J. O'Hara</a>
             <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav">
+            <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
@@ -120,120 +148,110 @@
             </ul>
         </div>
     </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.mobile-nav').classList.toggle('active');
+        });
+    </script>
 
     <section class="hero">
-        <div class="hero-inner">
+        <div class="container">
             <img src="images/headshot.jpg" alt="C.J. O'Hara" class="hero-photo">
             <div class="hero-content">
                 <h1>C.J. O'Hara</h1>
                 <p class="tagline">Account, Operations & Program Coordination</p>
-                <p class="location">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                    Huntington, NY · Open to Relocation
-                </p>
+                <p class="location">📍 Huntington, NY · Open to Relocation</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                        Get in Touch
-                    </a>
-                    <a href="https://www.linkedin.com/in/c-j-o-bb9954164/" target="_blank" class="btn btn-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        LinkedIn
-                    </a>
+                    <a href="mailto:coachchristeamg@gmail.com" class="btn btn-primary">Get in Touch</a>
+                    <a href="https://www.linkedin.com/in/c-j-o-bb9954164/" target="_blank" class="btn btn-outline">LinkedIn</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="alt">
-        <div class="section-inner">
+    <section id="about">
+        <div class="container">
             <h2 class="section-title">About Me</h2>
-            <div class="about-text">
+            <div class="about-content">
                 <p>I'm a client-facing professional with experience supporting accounts, coordinating programs, and managing day-to-day operations in fast-paced, service-driven environments.</p>
-                <p>My background spans account management at a market research firm working with global brands, sports operations management across multiple sites, and coaching at competitive tennis academies. I bring strengths in communication, organization, and relationship building to everything I do.</p>
-                <p>I'm currently seeking an entry-level account, project, or client success role with growth potential—somewhere I can bring my energy, learn quickly, and make an impact.</p>
-            </div>
-            <div class="skills-grid">
-                <span class="skill-tag">Account Coordination</span>
-                <span class="skill-tag">Client Communication</span>
-                <span class="skill-tag">Project Management</span>
-                <span class="skill-tag">Scheduling & Logistics</span>
-                <span class="skill-tag">Data Analysis</span>
-                <span class="skill-tag">Relationship Building</span>
-                <span class="skill-tag">Microsoft Office</span>
-                <span class="skill-tag">Google Workspace</span>
+                <p>My background spans account management at a market research firm working with global brands, sports operations across multiple sites, and coaching at competitive tennis academies. I bring strengths in communication, organization, and relationship building.</p>
+                <p>I'm currently seeking an entry-level account, project, or client success role with growth potential.</p>
+                <div class="skills">
+                    <span class="skill">Account Coordination</span>
+                    <span class="skill">Client Communication</span>
+                    <span class="skill">Project Management</span>
+                    <span class="skill">Scheduling & Logistics</span>
+                    <span class="skill">Data Analysis</span>
+                    <span class="skill">Relationship Building</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="experience">
-        <div class="section-inner">
+    <section id="experience" class="alt">
+        <div class="container">
             <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item current">
-                    <div class="timeline-dot"></div>
-                    <div class="job-header">
-                        <span class="job-title">Tennis Professional</span>
-                        <span class="job-date">2025 – Present</span>
-                    </div>
-                    <div class="job-company">Deer Park Tennis Club · Deer Park, NY</div>
-                    <ul class="job-bullets">
-                        <li>Manage ongoing relationships with athletes and families to drive satisfaction and retention</li>
-                        <li>Coordinate group programs, private sessions, and events while balancing schedules and resources</li>
-                        <li>Adapt communication and instruction for diverse participants, including children with special needs</li>
-                        <li>Represent the club on-site, supporting member engagement and brand reputation</li>
-                    </ul>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-title">Tennis Professional</span>
+                    <span class="experience-date">2025 – Present</span>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="job-header">
-                        <span class="job-title">Assistant Tennis Professional</span>
-                        <span class="job-date">2024 – 2025</span>
-                    </div>
-                    <div class="job-company">TeamG Academy · Woodland Hills, CA</div>
-                    <ul class="job-bullets">
-                        <li>Supported daily operations of a high-performance tennis academy</li>
-                        <li>Assisted in planning and delivering competitive training programs for elite junior athletes</li>
-                        <li>Helped distribute program information and support outreach to prospective clients</li>
-                        <li>Maintained facility readiness to ensure a professional, client-facing environment</li>
-                    </ul>
+                <div class="experience-company">Deer Park Tennis Club · Deer Park, NY</div>
+                <ul class="experience-bullets">
+                    <li>Manage ongoing relationships with athletes and families to drive satisfaction and retention</li>
+                    <li>Coordinate group programs, private sessions, and events while balancing schedules and resources</li>
+                    <li>Adapt communication and instruction for diverse participants, including children with special needs</li>
+                    <li>Represent the club on-site, supporting member engagement and brand reputation</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-title">Assistant Tennis Professional</span>
+                    <span class="experience-date">2024 – 2025</span>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="job-header">
-                        <span class="job-title">Athletics Coach</span>
-                        <span class="job-date">2023 – 2024</span>
-                    </div>
-                    <div class="job-company">Youth Athletes United · Los Angeles, CA</div>
-                    <ul class="job-bullets">
-                        <li>Delivered structured athletic programming across 15+ school sites</li>
-                        <li>Managed logistics, schedules, and on-site execution of youth sports programs</li>
-                        <li>Built strong relationships with school administrators, parents, and students</li>
-                    </ul>
+                <div class="experience-company">TeamG Academy · Woodland Hills, CA</div>
+                <ul class="experience-bullets">
+                    <li>Supported daily operations of a high-performance tennis academy</li>
+                    <li>Assisted in planning and delivering competitive training programs for elite junior athletes</li>
+                    <li>Helped distribute program information and support outreach to prospective clients</li>
+                    <li>Maintained facility readiness to ensure a professional, client-facing environment</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-title">Athletics Coach</span>
+                    <span class="experience-date">2023 – 2024</span>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="job-header">
-                        <span class="job-title">Account Manager</span>
-                        <span class="job-date">2022 – 2023</span>
-                    </div>
-                    <div class="job-company">Advertiser Perceptions · New York, NY</div>
-                    <ul class="job-bullets">
-                        <li>Supported research and reporting for global brands including L'Oréal, Coca-Cola, and Anheuser-Busch</li>
-                        <li>Analyzed marketing and media data to identify trends and insights</li>
-                        <li>Coordinated client communications, timelines, and report delivery</li>
-                        <li>Maintained internal documentation to support efficient project execution</li>
-                    </ul>
+                <div class="experience-company">Youth Athletes United · Los Angeles, CA</div>
+                <ul class="experience-bullets">
+                    <li>Delivered structured athletic programming across 15+ school sites</li>
+                    <li>Managed logistics, schedules, and on-site execution of youth sports programs</li>
+                    <li>Built strong relationships with school administrators, parents, and students</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-title">Account Manager</span>
+                    <span class="experience-date">2022 – 2023</span>
                 </div>
+                <div class="experience-company">Advertiser Perceptions · New York, NY</div>
+                <ul class="experience-bullets">
+                    <li>Supported research and reporting for global brands including L'Oréal, Coca-Cola, and Anheuser-Busch</li>
+                    <li>Analyzed marketing and media data to identify trends and insights</li>
+                    <li>Coordinated client communications, timelines, and report delivery</li>
+                    <li>Maintained internal documentation to support efficient project execution</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="education" class="alt">
-        <div class="section-inner">
+    <section id="education">
+        <div class="container">
             <h2 class="section-title">Education</h2>
             <div class="edu-grid">
                 <div class="edu-card">
@@ -247,32 +265,41 @@
                     <p class="year">Washington, DC · 2017–2018</p>
                 </div>
             </div>
-            <div class="cert-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-                USTA SafePlay Certified Coach
+            <div class="certification">
+                <div class="cert-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                    USTA SafePlay Certified Coach
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="section-inner">
+    <section id="contact" class="alt">
+        <div class="container">
             <h2 class="section-title">Get in Touch</h2>
+            <p class="contact-intro">I'm actively exploring new opportunities. Feel free to reach out.</p>
             <div class="contact-grid">
-                <a href="mailto:coachchristeamg@gmail.com" class="contact-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                    <h3>Email</h3>
-                    <p>coachchristeamg@gmail.com</p>
-                </a>
-                <a href="tel:631-495-6972" class="contact-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                    <h3>Phone</h3>
-                    <p>631-495-6972</p>
-                </a>
-                <a href="https://www.linkedin.com/in/c-j-o-bb9954164/" target="_blank" class="contact-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <h3>LinkedIn</h3>
-                    <p>Connect with me</p>
-                </a>
+                <div class="contact-card">
+                    <a href="mailto:coachchristeamg@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        <h3>Email</h3>
+                        <p>coachchristeamg@gmail.com</p>
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <a href="tel:631-495-6972">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        <h3>Phone</h3>
+                        <p>631-495-6972</p>
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <a href="https://www.linkedin.com/in/c-j-o-bb9954164/" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <h3>LinkedIn</h3>
+                        <p>Connect with me</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
