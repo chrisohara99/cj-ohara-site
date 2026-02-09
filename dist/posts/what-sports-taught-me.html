@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Coaching Sports Taught Me About Client Management | C.J. O'Hara</title>
+    <meta name="description" content="The skills that make a good coach are the same ones that make a good account manager.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --text: #333;
+            --text-light: #666;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e5e5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; line-height: 1.3; }
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 16px 0; }
+        nav .container { max-width: 900px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--text); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--primary); margin: 5px 0; }
+        
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); }
+        .mobile-nav.active { display: block; }
+        .mobile-nav ul { list-style: none; padding: 16px 24px; }
+        .mobile-nav li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .mobile-nav li:last-child { border-bottom: none; }
+        .mobile-nav a { color: var(--text); font-size: 1rem; font-weight: 500; }
+        
+        .article-header { padding: 120px 0 40px; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-size: 0.9rem; color: var(--text-light); }
+        .back-link:hover { color: var(--accent); }
+        .article-date { font-size: 0.9rem; color: var(--text-light); margin-bottom: 12px; }
+        .article-title { font-size: 2.2rem; color: var(--primary); margin-bottom: 16px; }
+        .article-tags { display: flex; gap: 8px; }
+        .tag { background: var(--bg-alt); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; color: var(--text-light); }
+        
+        .article-content { padding: 0 0 80px; }
+        .article-content p { margin-bottom: 24px; font-size: 1.1rem; }
+        .article-content h2 { font-size: 1.5rem; margin: 40px 0 20px; color: var(--primary); }
+        .article-content ul { margin: 0 0 24px 24px; }
+        .article-content li { margin-bottom: 12px; font-size: 1.1rem; }
+        .article-content blockquote { border-left: 3px solid var(--accent); padding-left: 20px; margin: 32px 0; font-style: italic; color: var(--text-light); }
+        
+        footer { background: var(--primary); color: white; padding: 32px 0; text-align: center; }
+        footer p { opacity: 0.7; font-size: 0.85rem; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .article-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container" style="max-width: 900px;">
+            <a href="../index.html" class="logo">C.J. O'Hara</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#experience">Experience</a></li>
+                <li><a href="../index.html#education">Education</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav">
+            <ul>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#experience">Experience</a></li>
+                <li><a href="../index.html#education">Education</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.mobile-nav').classList.toggle('active');
+        });
+    </script>
+
+    <header class="article-header">
+        <div class="container">
+            <a href="../blog.html" class="back-link">← Back to Blog</a>
+            <div class="article-date">February 5, 2026</div>
+            <h1 class="article-title">What Coaching Sports Taught Me About Client Management</h1>
+            <div class="article-tags">
+                <span class="tag">Career</span>
+                <span class="tag">Lessons</span>
+            </div>
+        </div>
+    </header>
+
+    <article class="article-content">
+        <div class="container">
+            <p>I've spent the last few years coaching tennis — working with kids, adults, competitive players, and complete beginners. What surprised me most wasn't anything about tennis. It was how much coaching taught me about working with clients in any context.</p>
+            
+            <p>The skills that make someone a good coach are remarkably similar to the skills that make someone good at account management, client success, or any client-facing role.</p>
+            
+            <h2>Meeting People Where They Are</h2>
+            
+            <p>The first thing you learn as a coach: everyone starts from a different place. A drill that works perfectly for one player completely overwhelms another. The same feedback that motivates one person discourages someone else.</p>
+            
+            <p>In client work, it's the same. You can't give every client the same experience. You have to understand where they're starting from — their context, their goals, their concerns — and adapt your approach accordingly.</p>
+            
+            <h2>Progress Over Perfection</h2>
+            
+            <p>Tennis is a game where you fail constantly. Even the best players in the world miss shots. The job of a coach isn't to eliminate mistakes — it's to help someone improve over time, celebrate small wins, and stay motivated through the inevitable setbacks.</p>
+            
+            <p>Client management works the same way. Projects hit snags. Timelines slip. Things don't go as planned. What matters is how you handle it: staying positive, focusing on progress, and keeping momentum going even when things get hard.</p>
+            
+            <h2>Communication Is Everything</h2>
+            
+            <p>A great coach isn't the one who knows the most about tennis. It's the one who can communicate clearly, listen carefully, and adapt their message to what the player needs to hear in that moment.</p>
+            
+            <p>Same with clients. The best account managers aren't always the ones with the most technical knowledge. They're the ones who listen, communicate proactively, and make clients feel heard and supported.</p>
+            
+            <h2>Relationships Over Transactions</h2>
+            
+            <p>The players who stick around aren't necessarily the ones who improve fastest. They're the ones who feel connected — who trust you, enjoy working with you, and feel like you genuinely care about their success.</p>
+            
+            <blockquote>In any client relationship, the transaction is secondary to the relationship itself. People work with people they trust and like.</blockquote>
+            
+            <p>Coaching taught me that every interaction is an opportunity to build trust. A small moment of extra care — remembering something personal, following up unprompted, going slightly beyond what's expected — compounds over time into real loyalty.</p>
+            
+            <h2>The Transferable Truth</h2>
+            
+            <p>I didn't expect my time on the tennis court to shape how I think about professional work. But the core of both is the same: understanding people, communicating clearly, building relationships, and helping others succeed.</p>
+            
+            <p>Those skills transfer anywhere. And they're the skills I'm most excited to bring to whatever comes next.</p>
+        </div>
+    </article>
+
+    <footer>
+        <p>&copy; 2026 C.J. O'Hara. All rights reserved.</p>
+    </footer>
+</body>
+</html>

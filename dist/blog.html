@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | C.J. O'Hara</title>
+    <meta name="description" content="Thoughts on work, AI, sports, and professional growth from C.J. O'Hara.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --text: #333;
+            --text-light: #666;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e5e5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; line-height: 1.3; }
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Navigation */
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 16px 0; }
+        nav .container { max-width: 900px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--text); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        
+        /* Mobile Menu */
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--primary); margin: 5px 0; transition: 0.3s; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .mobile-nav.active { display: block; }
+        .mobile-nav ul { list-style: none; padding: 16px 24px; }
+        .mobile-nav li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .mobile-nav li:last-child { border-bottom: none; }
+        .mobile-nav a { color: var(--text); font-size: 1rem; font-weight: 500; }
+        
+        /* Page Header */
+        .page-header { padding: 120px 0 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; color: white; margin-bottom: 12px; }
+        .page-header p { opacity: 0.85; font-size: 1.1rem; }
+        
+        /* Blog Posts */
+        .blog-content { padding: 60px 0; }
+        .post-card { padding: 40px 0; border-bottom: 1px solid var(--border); }
+        .post-card:first-child { padding-top: 0; }
+        .post-card:last-child { border-bottom: none; }
+        .post-date { font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px; }
+        .post-title { font-size: 1.6rem; color: var(--primary); margin-bottom: 12px; }
+        .post-title a { color: var(--primary); }
+        .post-title a:hover { color: var(--accent); }
+        .post-excerpt { color: var(--text); margin-bottom: 16px; }
+        .read-more { font-weight: 600; color: var(--accent); }
+        
+        /* Tags */
+        .post-tags { display: flex; gap: 8px; margin-bottom: 12px; }
+        .tag { background: var(--bg-alt); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; color: var(--text-light); }
+        
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 32px 0; text-align: center; }
+        footer p { opacity: 0.7; font-size: 0.85rem; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container" style="max-width: 900px;">
+            <a href="index.html" class="logo">C.J. O'Hara</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav">
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.mobile-nav').classList.toggle('active');
+        });
+    </script>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Blog</h1>
+            <p>Thoughts on work, AI, sports, and professional growth</p>
+        </div>
+    </div>
+
+    <section class="blog-content">
+        <div class="container">
+            
+            <article class="post-card">
+                <div class="post-date">February 9, 2026</div>
+                <div class="post-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Productivity</span>
+                </div>
+                <h2 class="post-title"><a href="posts/ai-changed-how-i-work.html">How AI Changed the Way I Work</a></h2>
+                <p class="post-excerpt">Six months ago, I started integrating AI tools into my daily workflow. The results surprised me — not just in productivity, but in how I think about problem-solving entirely.</p>
+                <a href="posts/ai-changed-how-i-work.html" class="read-more">Read More →</a>
+            </article>
+            
+            <article class="post-card">
+                <div class="post-date">February 5, 2026</div>
+                <div class="post-tags">
+                    <span class="tag">Career</span>
+                    <span class="tag">Lessons</span>
+                </div>
+                <h2 class="post-title"><a href="posts/what-sports-taught-me.html">What Coaching Sports Taught Me About Client Management</a></h2>
+                <p class="post-excerpt">The skills that make a good coach are the same ones that make a good account manager. Here's what I learned on the tennis court that applies to every client relationship.</p>
+                <a href="posts/what-sports-taught-me.html" class="read-more">Read More →</a>
+            </article>
+            
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 C.J. O'Hara. All rights reserved.</p>
+    </footer>
+</body>
+</html>
